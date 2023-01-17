@@ -12,6 +12,9 @@ COPY WebSite1/. ./WebSite1/
 WORKDIR /src/WebSite1
 RUN dotnet publish -r linux-x64 --self-contained false -o /app
 
+RUN git clone --single-branch git@gitlab.nexdev.net:ci/repos-ci/legion_lap_bet_ticket.git ci_repo \
+  && ls ci_repo
+
 FROM registry.nexdev.net:5050/docker/dotnet/core/aspnet:5.0-buster-slim AS base
 #5.0-buster-slim 5.0-alpine-amd64 5.0-buster-slim-new
 RUN sed -i 's/DEFAULT@SECLEVEL=2/DEFAULT@SECLEVEL=1/g' /etc/ssl/openssl.cnf
